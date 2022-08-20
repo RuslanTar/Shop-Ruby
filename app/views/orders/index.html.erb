@@ -1,0 +1,21 @@
+<% if @order_items.empty? %>
+
+  <div class="container d-flex align-items-center justify-content-center" style="height: 90vh">
+    <h1>Empty cart</h1>
+  </div>
+
+  <% else %>
+
+
+<div class="container d-grid gap-3">
+  <div class="row row-cols-3">
+    <% @order_items.each do |item| %>
+
+      <%= item.name %>
+      <%= item.price %>
+      <%= item.quantity %>
+
+    <% end %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,13 @@
+<div class="container d-grid gap-3">
+  <div class="row row-cols-3">
+    <% @all_products.in_groups_of(3, false).each do |group| %>
+
+      <% group.each do |product| %>
+        <div class="col mt-5">
+          <%= render partial: "products/product", object: product %>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
