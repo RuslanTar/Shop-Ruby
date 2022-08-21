@@ -12,38 +12,38 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_19_093856) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'order_items', force: :cascade do |t|
-    t.string 'product_id'
-    t.string 'quantity'
-    t.integer 'order_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "order_items", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "quantity", default: "0", null: false
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'orders', force: :cascade do |t|
-    t.string 'order_items'
-    t.string 'status'
-    t.integer 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "orders", force: :cascade do |t|
+    t.string "order_items"
+    t.string "status"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'products', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'price'
-    t.string 'comments'
-    t.bigint 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_products_on_user_id'
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "comments"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'name'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

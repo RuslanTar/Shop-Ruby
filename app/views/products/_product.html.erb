@@ -2,6 +2,7 @@
   <div class="card-body" style="padding-bottom: 2.5em">
     <h3 class="card-title text-center">Name: <%= product.name %></h3>
     <p class="card-text">Price: <%= product.price %></p>
+    <%= link_to "Add to Cart", product_order_items_path(product), data: { "turbo-method": :post }, class: "btn btn-outline-success" %>
   </div>
 
 </div>

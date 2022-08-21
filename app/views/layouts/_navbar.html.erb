@@ -8,7 +8,10 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <%= link_to "Home", "/", class: "nav-item nav-link" %>
-      <%= link_to "Cart", orders_path, class: "nav-item nav-link" %>
+      <%= link_to orders_path, class: "nav-item nav-link" do %>
+        Cart
+        <span class="badge text-bg-secondary"><%= current_order.order_items.size %></span>
+      <% end %>
     </div>
   </div>
 </nav>

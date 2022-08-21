@@ -5,17 +5,37 @@
   </div>
 
   <% else %>
+    <div class="container d-grid gap-3">
+      <div class="row row-cols-3">
+        <% @order_items.in_groups_of(3, false).each do |group| %>
+          <% group.each do |item| %>
+            <div class="col mt-5">
+              <div class="card bg-light p-2 text-center shadow">
+                <div class="card-body" style="padding-bottom: 2.5em">
+                  <h3 class="card-title text-center">Name: <%= item.product.name %></h3>
+                  <p class="card-text">Price: <%= item.product.price * item.quantity %> (<%= item.product.price %> x <%= item.quantity %>)</p>
+                  <p class="card-text">Quantity: <%= item.quantity %></p>
+                  <%= link_to '+',
+                              product_order_item_path(product_id: item.product.id, id: item.id, quantity: item.quantity + 1),
+                              data: { "turbo-method": :put },
+                              class: "btn btn-primary"
+                  %>
+                  <%= link_to '-',
+                              product_order_item_path(product_id: item.product.id, id: item.id, quantity: item.quantity - 1),
+                              data: { "turbo-method": :put, method: "decrement"},
+                              class: "btn btn-secondary"
+                  %>
+                  <%= link_to 'Delete',
+                              product_order_item_path(product_id: item.product.id, id: item.id),
+                              data: { "turbo-method": :delete},
+                              class: "btn btn-outline-danger"
+                  %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-
-<div class="container d-grid gap-3">
-  <div class="row row-cols-3">
-    <% @order_items.each do |item| %>
-
-      <%= item.name %>
-      <%= item.price %>
-      <%= item.quantity %>
-
-    <% end %>
-  </div>
-</div>
 <% end %>
