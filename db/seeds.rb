@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.create(name: 'User1')
+User.create(name: 'User1', email: 'test@gmail.com', password: "Test123456")
+p "User:\nname: User1\nemail: test@gmail.com\npassword: Test123456"
 
 5.times do |i|
   Product.create(name: "Product ##{i}", user: User.first, price: i * 10)

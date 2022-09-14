@@ -9,4 +9,12 @@ Rails.application.routes.draw do
   end
 
   resources :orders
+
+  devise_scope :user do
+    # Redirests signing out users back to sign-in
+    get "users", to: "users/sessions#new"
+  end
+
+  devise_for :users, module: "users"
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

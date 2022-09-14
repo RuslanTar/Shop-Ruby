@@ -29,6 +29,9 @@ gem "jbuilder"
 
 gem 'bootstrap', '~> 5.2.0'
 
+# For user login, register functionality
+gem "devise", "~> 4.8"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -56,6 +59,9 @@ group :development, :test do
 end
 
 group :development do
+  # Interface for browsing sent emails.
+  gem 'letter_opener_web', '~> 2.0'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
