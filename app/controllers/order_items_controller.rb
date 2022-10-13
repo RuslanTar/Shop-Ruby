@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderItemsController < ApplicationController
   before_action :set_product
 

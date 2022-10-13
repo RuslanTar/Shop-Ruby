@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,9 +15,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     # Redirests signing out users back to sign-in
-    get "users", to: "users/sessions#new"
+    get 'users', to: 'users/sessions#new'
   end
 
-  devise_for :users, module: "users"
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  devise_for :users, module: 'users'
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
