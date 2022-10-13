@@ -321,6 +321,7 @@ DEPENDENCIES
   devise (~> 4.8)
   importmap-rails
   jbuilder
+  jquery-rails
   letter_opener_web (~> 2.0)
   pg (~> 1.1)
   puma (~> 5.0)
