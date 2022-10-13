@@ -68,6 +68,8 @@ group :development do
 
   gem 'rubocop', require: false
 
+  gem 'annotate'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
