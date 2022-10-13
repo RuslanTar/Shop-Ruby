@@ -29,6 +29,8 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+gem 'jquery-rails'
+
 gem 'bootstrap', '~> 5.2.0'
 
 # For user login, register functionality
