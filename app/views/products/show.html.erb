@@ -1,0 +1,11 @@
+<%= render TurboModalComponent.new(product_name: @product.name) do %>
+  <%= render 'products/product_content', product: @product %>
+<% end %>
+
+<%= @product.name %>
+<%= @product.description %>
+<% @product.images.each do |image| %>
+  <%= image_tag image.variant(:medium)  %>
+<% end %>
+<%= link_to 'Home', root_path, class: 'btn btn-success' %>
+<%= link_to 'Destroy', product_path(@product), data: { 'turbo-method': :delete }, class: "btn btn-danger" %>

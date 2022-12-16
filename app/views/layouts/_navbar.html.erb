@@ -1,28 +1,51 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow">
-  <div class="container" style="width: auto">
-    <a class="navbar-brand" href="/">Ruby Shop</a>
-  </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav w-100">
-      <%= link_to "Home", "/", class: "nav-item nav-link" %>
-      <% if user_signed_in? %>
-        <%= link_to orders_path, class: "nav-item nav-link" do %>
-          Cart
-          <% if current_order.order_items.size > 0 %>
-            <span class="badge text-bg-secondary"><%= current_order.order_items.size %></span>
-          <% end %>
-        <% end %>
-
-        <div class="ms-auto navbar-nav">
-          <span class="nav-item navbar-text"><%= truncate current_user.name, length: 50 %></span>
-          <%= link_to "Log Out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-item nav-link" %>
-        </div>
-      <% end %>
-
-
+  <div class="container-fluid">
+    <div class="navbar-brand">
+<!--      <span class="navbar-brand mb-0 h1">Ruby Shop</span>-->
+      <%= link_to "Ruby Shop", "/", class: "navbar-brand mb-0 h1" %>
     </div>
+    <% if user_signed_in? %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-between flex-grow-1">
+            <div class="d-lg-flex">
+              <li class="nav-item">
+                <%= link_to icon("fa-solid", "house", "Home", class: "fa-md text-center", style: "width: 20px"), "/", class: "nav-link active", "aria-current": "page" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to orders_path, class: "nav-item nav-link" do %>
+                  <%= icon('fa-solid', 'cart-shopping', "Cart", class: "fa-md text-center", style: "width: 20px") %>
+                  <% if current_order.order_items.size.positive? %>
+                    <%= turbo_stream_from dom_id(current_order, :size) %>
+                    <span class="badge text-bg-secondary" id="<%= dom_id(current_order, :size) %>">
+                      <%= render 'orders/size', order_size: current_order.order_items.sum(&:quantity) %>
+                    </span>
+
+                  <% end %>
+                <% end %>
+              </li>
+            </div>
+
+            <div class="d-lg-flex">
+              <li class="nav-item navbar-text text-truncate">
+                <span><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md text-center", style: "width: 20px") %></span>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to icon('fa-solid', 'right-from-bracket', "Log Out", class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-link text-danger text-opacity-50" %>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    <% end %>
   </div>
 </nav>

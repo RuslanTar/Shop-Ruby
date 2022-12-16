@@ -16,5 +16,9 @@ class Order < ApplicationRecord
 
   has_many :order_items, dependent: :destroy
 
-  enum status: %i[in_progress ordered canceled]
+  enum status: %i[in_progress ordered canceled], _prefix: true
+
+  def total_price
+    order_items.sum(&:total_price)
+  end
 end

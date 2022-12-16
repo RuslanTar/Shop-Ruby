@@ -1,8 +1,30 @@
-<div class="card bg-light p-2 h-100 shadow">
-  <div class="card-body" style="padding-bottom: 2.5em">
-    <h3 class="card-title text-center">Name: <%= product.name %></h3>
-    <p class="card-text">Price: <%= product.price %></p>
-    <%= link_to "Add to Cart", product_order_items_path(product), data: { "turbo-method": :post }, class: "btn btn-outline-success" %>
-  </div>
+<div class="col p-0 my-sm-3 cards_wrap catalog">
+  <div class="card bg-light m-sm-2 h-100 shadow-sm card-flyer">
+    <%= link_to product, data: { turbo_frame: 'modal' } do %>
+      <div class="card-img-top" style="overflow: hidden; aspect-ratio: 1 / 1;">
+        <%= image_tag (product.images.first&.variant(:medium) || "everlabs_logo.jpeg"),
+                      style: "object-fit: cover; cursor: pointer",
+                      class: "card-img-top"
+        %>
+      </div>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title text-center text-truncate fs-6" style="object-fit: cover; cursor: pointer" data-bs-toggle="modal" data-bs-target="#niceModal">
+        <%= product.name&.truncate(50) %>
+      </h5>
+      <div class="d-flex justify-content-between align-items-center mt-3 fs-4">
+        <h3 class="card-text text-body m-0"><%= number_to_currency(product.price, precision: 0) %></h3>
+        <%= link_to "Add to Cart", product_order_items_path(product), data: { "turbo-method": :post },
+                      class: "btn btn-outline-success desktop-add-cart-button" %>
+        <div class="mobile-add-cart-button rounded-circle border d-flex justify-content-center align-items-center">
+          <%= link_to icon('fa-solid', 'cart-shopping', class: "fa-sm", style: "vertical-align: middle"), product_order_items_path(product), data: { "turbo-method": :post } %>
+        </div>
 
+      </div>
+    </div>
+  </div>
 </div>
+
+<%#= turbo_frame_tag "modal" do %>
+  <%#= render partial: "products/product_modal", locals: { product: Product.last } %>
+<%# end %>

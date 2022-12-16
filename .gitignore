@@ -32,3 +32,6 @@
 
 .idea
 config/database.yml
+
+# Ignore application configuration
+/config/application.yml

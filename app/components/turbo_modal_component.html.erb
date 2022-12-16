@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "modal" do %>
+  <%= tag.div data: { controller: "turbo-modal",
+                      turbo_modal_target: "modal",
+                      action: "turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground" },
+              class: "modal fade show", tabindex: '-1', style: "display: block" do %>
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalLabel"><%= @product_name %></h1>
+          <%= button_tag '', data: { action: "turbo-modal#hideModal" }, class: "btn-close", type: 'button', 'aria-label': "Close" %>
+        </div>
+        <div class="modal-body">
+          <%= content %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-action="turbo-modal#hideModal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,49 @@
+<div class="d-flex flex-direction-row">
+  <!--Carousel-->
+  <div class="w-50">
+    <div id="productsCarousel<%= product.id %>" class="carousel carousel-dark slide">
+      <div class="carousel-indicators">
+        <% if product.images.size > 1 %>
+          <% product.images.size.times do |index| %>
+            <button type="button" data-bs-target="#productsCarousel<%= product.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= index == 0 %>" aria-label="Slide <%= index + 1 %>"></button>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="carousel-inner">
+        <% if product.images.size.positive? %>
+          <% product.images.each.with_index do |image, index| %>
+            <div class="carousel-item<%= ' active' if index == 0 %>">
+              <%= image_tag image.variant(:medium), class: "d-block w-100 carousel-item-image" %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= image_tag "everlabs_logo.jpeg", class: "d-block w-100 carousel-item-image" %>
+        <% end %>
+      </div>
+      <% if product.images.size > 1 %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#productsCarousel<%= product.id %>" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productsCarousel<%= product.id %>" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+  <!--  Info-->
+  <div class="ps-3 w-50">
+    <div class="d-flex m-3">
+      <h3 class="text-danger me-3"><%= number_to_currency(product.price, precision: 0) %></h3>
+      <%= link_to "Add to Cart", product_order_items_path(product), data: { "turbo-method": :post }, class: "btn btn-outline-success" %>
+    </div>
+    <% threshold = 300 %>
+    <p class="mb-0"><%= product.description&.truncate(threshold, separator: ' ') %></p>
+    <% if product.description.length > threshold %>
+      <p id="fullDescription" class="collapse"><%= product.description&.from(threshold - 2) %></p>
+      <a href="#fullDescription" data-bs-toggle="collapse" role="button">See full description</a>
+    <% end %>
+  </div>
+</div>

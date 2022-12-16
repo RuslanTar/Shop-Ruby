@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between justify-content-sm-end align-items-center" id="<%= dom_id(order_item, :price) %>">
+  <div class="d-flex align-items-center">
+    <%= link_to icon('fa', 'minus', class: "fa-xl", 'aria-hidden': true),
+                product_order_item_path(product_id: order_item.product.id, id: order_item.id, quantity: order_item.quantity - 1),
+                data: { "turbo-method": :put },
+                role: "button",
+                class: "order-item-button btn btn-outline-primary#{' disabled' if order_item.quantity <= 1}"
+    %>
+
+    <%= form_with url: product_order_item_url(product_id: order_item.product.id, id: order_item.id), method: :put, local: true do |f| %>
+      <%= f.number_field :quantity, value: order_item.quantity, class: 'order-item-input' %>
+      <!--        , :onchange => 'this.form.submit()'-->
+    <% end %>
+
+    <%= link_to icon('fa', 'plus', class: "fa-xl", 'aria-hidden': true),
+                product_order_item_path(product_id: order_item.product.id, id: order_item.id, quantity: order_item.quantity + 1),
+                data: { "turbo-method": :put },
+                role: "button",
+                class: "order-item-button btn btn-outline-primary"
+    %>
+  </div>
+  <div class="text-end fs-4 order-item-price text-truncate"><%= number_to_currency(order_item.product.price * order_item.quantity) %></div>
+</div>

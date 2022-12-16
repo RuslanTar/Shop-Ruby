@@ -29,6 +29,8 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+gem 'font-awesome-sass'
+
 gem 'jquery-rails'
 
 gem 'bootstrap', '~> 5.2.0'
@@ -53,11 +55,15 @@ gem 'bootsnap', require: false
 
 gem 'activeadmin'
 
+gem "figaro"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'file_validators'
+gem 'image_processing', '~> 1.2'
+gem 'rmagick'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -88,3 +94,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem "view_component", "~> 2.79"

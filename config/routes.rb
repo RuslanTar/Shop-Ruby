@@ -8,10 +8,14 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products do
-    resources :order_items, only: %i[index show create update destroy]
+    resources :order_items, only: %i[index create update destroy]
   end
 
-  resources :orders
+  resources :orders do
+    collection do
+      post 'cancel_order', as: :cancel
+    end
+  end
 
   devise_scope :user do
     # Redirests signing out users back to sign-in

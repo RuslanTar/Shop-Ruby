@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import 'bootstrap'
+
+// //= require fontawesome/all
+// FontAwesome.config.mutateApproach = 'sync'
