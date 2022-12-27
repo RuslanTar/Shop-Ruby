@@ -7,6 +7,8 @@
 #  id          :bigint           not null, primary key
 #  comments    :string
 #  description :text
+#  description :text
+#  name        :string
 #  name        :string
 #  price       :integer
 #  created_at  :datetime         not null

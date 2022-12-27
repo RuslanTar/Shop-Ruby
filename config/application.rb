@@ -21,5 +21,10 @@ module Shop
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # For version 1.1.0 and above of the `i18n` gem:
+    config.i18n.fallbacks = [I18n.default_locale]
+    # Below version 1.1.0 of the `i18n` gem:
+    config.i18n.fallbacks = true
   end
 end

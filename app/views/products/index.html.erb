@@ -1,5 +1,7 @@
 <div class="container gap-3 mt-sm-4">
   <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4 mb-sm-5">
-    <%= render partial: @all_products %>
+    <% Globalize.with_locale(I18n.locale) do %>
+      <%= render partial: @all_products %>
+    <% end %>
   </div>
 </div>

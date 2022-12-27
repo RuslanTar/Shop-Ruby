@@ -39,7 +39,7 @@
   </div>
   <% threshold = 300 %>
     <p class="mb-0 pt-2"><%= product.description&.truncate(threshold, separator: ' ', omission: '') %></p>
-  <% if product.description.length > threshold %>
+  <% if product.description.present? && product.description.length > threshold %>
     <p id="fullDescription" class="collapse"><%= product.description&.from(threshold - 2) %></p>
     <a href="#fullDescription" data-bs-toggle="collapse" role="button">See full description</a>
   <% end %>

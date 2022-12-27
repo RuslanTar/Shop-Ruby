@@ -1,5 +1,9 @@
 <%= render TurboModalComponent.new(product_name: @product.name) do %>
+  <%# Globalize.with_locale(I18n.locale) do %>
+    <%#= render 'products/product_content', product: @product %>
+  <%# end %>
   <%= render 'products/product_content', product: @product %>
+
 <% end %>
 
 <%= @product.name %>

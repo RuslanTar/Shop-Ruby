@@ -7,6 +7,8 @@
 #  id          :bigint           not null, primary key
 #  comments    :string
 #  description :text
+#  description :text
+#  name        :string
 #  name        :string
 #  price       :integer
 #  created_at  :datetime         not null
@@ -19,6 +21,8 @@
 #
 class Product < ApplicationRecord
   belongs_to :user
+
+  translates :name, :description, fallbacks_for_empty_translations: true
 
   # attribute :images, default: ['everlabs_logo.jpeg']
 

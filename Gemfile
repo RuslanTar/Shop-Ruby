@@ -31,6 +31,8 @@ gem 'jbuilder'
 
 gem 'font-awesome-sass'
 
+gem 'globalize'
+
 gem 'jquery-rails'
 
 gem 'bootstrap', '~> 5.2.0'
