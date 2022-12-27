@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-start order-item-main overflow-hidden">
       <%= link_to order_item.product, data: { turbo_frame: 'modal' }, class: 'text-decoration-none text-reset' do %>
         <%= image_tag (order_item.product.images.first&.variant(:small) || "everlabs_logo.jpeg"),
-                      class: "cart-item-image me-3 order-item-picture",
+                      class: "cart-item-image me-3",
                       style: "cursor: pointer" %>
       <% end %>
       <%= link_to order_item.product, data: { turbo_frame: 'modal' }, class: 'text-decoration-none text-reset' do %>

@@ -13,11 +13,20 @@
  *= require_tree .
  *= require_self
  *= stub 'active_admin'
+ *= require 'darkmode'
  */
 
 /*Custom bootstrap variables must be set or imported *before* bootstrap.*/
 @import 'bootstrap';
 @import "font-awesome";
+
+body, .navbar, .offcanvas, .card, .modal-content, .order > .card, .order-item-input, #order_items > div, .dropdown-menu, .dropdown-item {
+  transition: 0.3s ease-in-out;
+}
+
+.offcanvas {
+  --bs-offcanvas-border-width: 0;
+}
 
 body .fade {
   background-color: rgba(0, 0, 0, 0.5);
@@ -52,6 +61,7 @@ body .fade {
 }
 
 .cart-item-image {
+  border-radius: 0.5em;
   width: 100px;
   height: 100px;
   object-fit: contain;
@@ -88,9 +98,15 @@ body .fade {
 }
 
 .carousel-item-image {
-  width: 400px;
-  height: 300px;
   object-fit: contain;
+  border-radius: 0.5em;
+  height: 250px;
+  max-width: 100%;
+  margin: auto;
+}
+
+#productsCarousel {
+  height: 250px;
 }
 
 .mobile-add-cart-button {
@@ -138,6 +154,7 @@ body .fade {
   .order-item-input {
     border: none;
     width: 32px;
+    background-color: inherit !important;
   }
 
   .order-item-input:hover {
@@ -148,10 +165,6 @@ body .fade {
     outline: none;
     box-shadow: none;
     z-index: 1;
-  }
-
-  .order-item-picture {
-    width: 25%;
   }
   //
   //.order-item-main {
@@ -182,15 +195,47 @@ body .fade {
     min-width: 25vw !important;
   }
 
-  .order-item-picture {
-    width: 96px;
-  }
-
   //.order-item-main {
   //  width: 75%;
   //}`
 
   .order-item-price {
     width: 25%;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  #nav-right > .darkmode-switch {
+    display: none !important;
+  }
+
+  #nav-main > .darkmode-switch {
+    display: flex !important;
+  }
+
+  .modal-body {
+    flex-direction: column;
+  }
+
+  #price-and-button {
+    justify-content: space-between;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  #nav-right > .darkmode-switch {
+    display: flex !important;
+  }
+
+  #nav-main > .darkmode-switch {
+    display: none !important;
+  }
+
+  #productsCarousel {
+    width: 50%;
+  }
+
+  #modal-info {
+    width: 50%;
   }
 }
