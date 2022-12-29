@@ -30,4 +30,21 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  navbar:
+    home: "Home"
+    cart: "Cart"
+    logout: "Log Out"
+    menu: "Menu"
+  cart:
+    name: "Cart"
+    empty_cart: "Empty cart"
+    order:
+      complete: 'Complete order'
+      cancel: 'Cancel'
+      order_item:
+        remove: 'Remove'
+  product:
+    add_to_cart: 'Add to Cart'
+  modal:
+    close: 'Close'
+

@@ -18,7 +18,7 @@
       </button>
       <ul class="dropdown-menu">
         <li>
-          <%= link_to icon("fa-regular", "trash-can", "Remove", class: "fa-lg me-2 py-3"),
+          <%= link_to icon("fa-regular", "trash-can", I18n.t('cart.order.order_item.remove'), class: "fa-lg me-2 py-3"),
                       product_order_item_path(product_id: order_item.product.id, id: order_item.id),
                       data: { "turbo-method": :delete},
                       class: "order-item-button dropdown-item btn btn-outline-danger"

@@ -8,7 +8,7 @@ module Users
     # def new
     #   super
     # end
-    #
+
     # # POST /resource/sign_in
     # def create
     #   super

@@ -23,8 +23,9 @@ module Shop
     # config.eager_load_paths << Rails.root.join("extras")
 
     # For version 1.1.0 and above of the `i18n` gem:
-    config.i18n.fallbacks = [I18n.default_locale]
+    config.i18n.fallbacks = { en: %i[en uk], uk: %i[uk en] }
     # Below version 1.1.0 of the `i18n` gem:
-    config.i18n.fallbacks = true
+    # config.i18n.fallbacks = true
+    config.i18n.default_locale = :uk
   end
 end

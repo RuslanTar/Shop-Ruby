@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get 'users', to: 'users/sessions#new'
   end
 
+  get 'locale', to: 'translations#switch_locale', as: :switch_locale
+
   devise_for :users, module: 'users'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

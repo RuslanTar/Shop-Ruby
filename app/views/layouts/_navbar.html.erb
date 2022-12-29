@@ -5,6 +5,8 @@
       Ruby Shop
     <% end %>
 
+  <%= render 'layouts/language_selector' %>
+
     <input type="checkbox" class="color_mode_button" id="darkmode-toggle"/>
     <%= render 'layouts/darkmode_switch' %>
 
@@ -15,19 +17,19 @@
 
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%= I18n.t('navbar.menu') %></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-between flex-grow-1">
             <div class="d-lg-flex">
               <li class="nav-item">
-                <%= link_to icon("fa-solid", "house", "Home", class: "fa-md text-center", style: "width: 20px"), "/", class: "nav-link active", "aria-current": "page" %>
+                <%= link_to icon("fa-solid", "house", I18n.t('navbar.home'), class: "fa-md text-center", style: "width: 20px"), "/", class: "nav-link active", "aria-current": "page" %>
               </li>
 
               <li class="nav-item">
                 <%= link_to orders_path, class: "nav-item nav-link" do %>
-                  <%= icon('fa-solid', 'cart-shopping', "Cart", class: "fa-md text-center", style: "width: 20px") %>
+                  <%= icon('fa-solid', 'cart-shopping', I18n.t('navbar.cart'), class: "fa-md text-center", style: "width: 20px") %>
                   <% if current_order.order_items.size.positive? %>
                     <%= turbo_stream_from dom_id(current_order, :size) %>
                     <span class="badge text-bg-secondary" id="<%= dom_id(current_order, :size) %>">
@@ -46,7 +48,7 @@
               </li>
 
               <li class="nav-item">
-                <%= link_to icon('fa-solid', 'right-from-bracket', "Log Out", class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-link text-danger" %>
+                <%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-link text-danger" %>
               </li>
             </div>
           </ul>

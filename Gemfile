@@ -57,7 +57,7 @@ gem 'bootsnap', require: false
 
 gem 'activeadmin'
 
-gem "figaro"
+gem 'figaro'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -97,4 +97,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "view_component", "~> 2.79"
+gem 'view_component', '~> 2.79'

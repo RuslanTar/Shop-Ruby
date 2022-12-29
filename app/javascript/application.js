@@ -6,9 +6,16 @@ import 'bootstrap'
 // //= require fontawesome/all
 // FontAwesome.config.mutateApproach = 'sync'
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
     switcherState();
     switchMode(document.getElementById("darkmode-toggle"));
+
+    document.querySelectorAll('.color_mode_button').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const targetElement = /** @type {HTMLElement} */ (event.currentTarget);
+            switchMode(targetElement);
+        });
+    });
 });
 
 function switcherState() {
@@ -54,10 +61,3 @@ function switchMode(targetElement) {
         throw new Error(`unrecognized color mode button id ${targetElement}.`)
     }
 }
-
-document.querySelectorAll('.color_mode_button').forEach((button) => {
-    button.addEventListener('click', (event) => {
-        const targetElement = /** @type {HTMLElement} */ (event.currentTarget);
-        switchMode(targetElement);
-    });
-});

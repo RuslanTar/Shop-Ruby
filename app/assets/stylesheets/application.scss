@@ -124,6 +124,21 @@ body .fade {
   background-color: inherit !important;
 }
 
+.language-select {
+  list-style-type: none;
+}
+
+.language-select ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+.language-select ul a:not(:first-child) {
+  border-left: 1px solid var(--bs-gray-600);
+}
+
 @include media-breakpoint-down(sm) {
   .catalog .card, .card-img, .card-img-top {
     border-radius: 0;

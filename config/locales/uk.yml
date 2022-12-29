@@ -1,0 +1,19 @@
+uk:
+  navbar:
+    home: "Дім"
+    cart: "Кошик"
+    logout: "Вийди звідси"
+    menu: "Меню подано"
+  cart:
+    name: "Кошик"
+    empty_cart: "Кошик пустий"
+    order:
+      complete: 'Підтвердити замовлення'
+      cancel: 'Відмінити'
+      order_item:
+        remove: 'Видалити'
+  product:
+    add_to_cart: 'Додати у кошик'
+  modal:
+    close: 'Закрити'
+

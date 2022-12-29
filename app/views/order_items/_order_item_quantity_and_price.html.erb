@@ -7,7 +7,7 @@
                 class: "order-item-button ps-0 btn btn-outline-primary#{' disabled' if order_item.quantity <= 1}"
     %>
 
-    <%= form_with url: product_order_item_path(product_id: order_item.product.id, id: order_item.id), method: :put, local: false do |f| %>
+    <%= form_with url: product_order_item_path(product_id: order_item.product.id, id: order_item.id), method: :put do |f| %>
       <%= f.number_field :quantity, value: order_item.quantity, class: 'order-item-input' %>
       <!--        , :onchange => 'this.form.submit()'-->
     <% end %>
