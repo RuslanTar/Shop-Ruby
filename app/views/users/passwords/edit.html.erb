@@ -3,7 +3,7 @@
     <div class="d-inline-block w-50">
       <h2 class="text-center">Change your password</h2>
 
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name, locale: I18n.locale), html: { method: :put }) do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
         <%= f.hidden_field :reset_password_token %>
 

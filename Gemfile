@@ -40,6 +40,11 @@ gem 'bootstrap', '~> 5.2.0'
 # For user login, register functionality
 gem 'devise', '~> 4.8'
 
+# sending requests
+gem 'httparty'
+
+gem 'sidekiq'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

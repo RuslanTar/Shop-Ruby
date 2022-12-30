@@ -30,6 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        unit: "$"
   navbar:
     home: "Home"
     cart: "Cart"
@@ -37,7 +42,7 @@ en:
     menu: "Menu"
   cart:
     name: "Cart"
-    empty_cart: "Empty cart"
+    empty_cart: "Empty"
     order:
       complete: 'Complete order'
       cancel: 'Cancel'

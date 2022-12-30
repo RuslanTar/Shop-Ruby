@@ -10,9 +10,10 @@ Bundler.require(*Rails.groups)
 
 module Shop
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.active_storage.variant_processor = :mini_magick
+    # config.active_storage.variant_processor = :vips
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -27,5 +28,9 @@ module Shop
     # Below version 1.1.0 of the `i18n` gem:
     # config.i18n.fallbacks = true
     config.i18n.default_locale = :uk
+
+    config.after_initialize do
+      UpdateCurrenciesJob.perform_async
+    end
   end
 end

@@ -334,4 +334,18 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  config.namespace :admin do |admin|
+    admin.build_menu :utility_navigation do |menu|
+      menu.add label: 'Languages' do |lang|
+        lang.add label: 'Ukrainian', url: proc { url_for(locale: 'uk') }, id: 'i18n-uk', priority: 1
+        lang.add label: 'English', url: proc { url_for(locale: 'en') }, id: 'i18n-en', priority: 2
+      end
+      menu.add label: proc { display_name current_active_admin_user },
+               url: '#',
+               id: 'current_user',
+               if: proc { current_active_admin_user? }
+      admin.add_logout_button_to_menu menu
+    end
+  end
 end

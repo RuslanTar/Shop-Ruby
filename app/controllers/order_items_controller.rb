@@ -4,13 +4,24 @@ class OrderItemsController < ApplicationController
   before_action :set_order_item
 
   def create
-    if @order_item
+    if current_order.order_items.blank?
+      @order_item = current_order.order_items.create(product_id: params[:product_id])
+      @order_item.broadcast_update_later_to [@order_item.order, 'order_items'],
+                                            partial: 'order_items/order_item',
+                                            target: 'order_items',
+                                            locals: { order_item: @order_item }
+
+    elsif @order_item
       @order_item.update(quantity: @order_item.quantity + 1)
+      @order_item.broadcast_replace_later_to "price_order_item_#{@order_item.id}",
+                                             partial: 'order_items/order_item_quantity_and_price',
+                                             target: "price_order_item_#{@order_item.id}",
+                                             locals: { order_item: @order_item }
     else
       @order_item = current_order.order_items.create(product_id: params[:product_id])
+      @order_item.broadcast_prepend_later_to [@order_item.order, 'order_items']
     end
 
-    @order_item.broadcast_prepend_later_to [@order_item.order, 'order_items']
     @order_item.broadcast_update_later_to "total_order_#{@order_item.order.id}",
                                           partial: 'orders/total',
                                           target: "total_order_#{@order_item.order.id}",
@@ -31,11 +42,11 @@ class OrderItemsController < ApplicationController
     @order_item.broadcast_replace_later_to "price_order_item_#{@order_item.id}",
                                            partial: 'order_items/order_item_quantity_and_price',
                                            target: "price_order_item_#{@order_item.id}",
-                                           locals: { order_item: @order_item }
+                                           locals: { order_item: @order_item, locale: params[:locale] }
     @order_item.broadcast_update_later_to "total_order_#{@order_item.order.id}",
                                           partial: 'orders/total',
                                           target: "total_order_#{@order_item.order.id}",
-                                          locals: { order_total: @order_item.order.total_price }
+                                          locals: { order_total: @order_item.order.total_price, locale: params[:locale] }
     @order_item.broadcast_update_later_to "size_order_#{@order_item.order.id}",
                                           partial: 'orders/size',
                                           target: "size_order_#{@order_item.order.id}",
@@ -49,7 +60,16 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
 
-    @order_item.broadcast_remove_to [@order_item.order, 'order_items']
+    # debugger
+    if current_order.order_items.blank?
+      @order_item.broadcast_update_to [@order_item.order, 'order_items'],
+                                      partial: 'orders/empty_cart',
+                                      target: 'order_items',
+                                      locals: { locale: params[:locale] }
+    else
+      @order_item.broadcast_remove_to [@order_item.order, 'order_items']
+    end
+
     @order_item.broadcast_update_to "total_order_#{@order_item.order.id}",
                                     partial: 'orders/total',
                                     target: "total_order_#{@order_item.order.id}",

@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center flex-column auth-block">
     <h2 class="text-center"><%= I18n.t('devise.links.sign_up') %></h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { 'data-turbo': 'false' }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name, locale: I18n.locale), html: { 'data-turbo': 'false' }) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
 
       <div class="form-group">

@@ -60,11 +60,11 @@ ActiveAdmin.register Product do
     f.semantic_errors
     f.inputs do
       input :user
-      input :name
+      input :name, locale: I18n.locale
+      input :description, locale: I18n.locale
       input :price
       input :images, as: :file, input_html: { multiple: true }
       input :comments
-      input :description
     end
     f.actions
   end

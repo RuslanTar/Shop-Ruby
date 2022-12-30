@@ -1,40 +1,31 @@
-<% if @order_items.empty? %>
+<div class="text-center my-4">
+  <h1><%= I18n.t('cart.name') %></h1>
+</div>
 
-  <div class="container d-flex align-items-center justify-content-center">
-    <h1><%= I18n.t("cart.empty_cart") %></h1>
-  </div>
-
-  <% else %>
-  <div class="text-center my-4">
-      <h1><%= I18n.t('cart.name') %></h1>
-  </div>
-
-  <%#= turbo_stream_from current_order %>
-<!--  <div class="container mb-sm-5 order" id="<%#= current_order %>">-->
-  <div class="container mb-sm-5 order">
-
-
-    <%= turbo_stream_from current_order, "order_items" %>
-    <div id="order_items">
+<div class="container mb-sm-5 order">
+  <%= turbo_stream_from current_order, "order_items" %>
+  <div id="order_items">
+    <% if @order_items.blank? %>
+      <%= render 'orders/empty_cart' %>
+    <% else %>
       <%= render @order_items %>
-    </div>
-
-    <div class="d-grid d-sm-flex gap-2 justify-content-sm-end my-3">
-      <%= turbo_stream_from dom_id(current_order, :total) %>
-      <div id="<%= dom_id(current_order, :total) %>">
-        <%= render 'orders/total', order_total: current_order.total_price %>
-      </div>
-
-      <%= link_to I18n.t('cart.order.complete'),
-                  edit_order_path(current_order),
-                  class: "btn btn-success btn-lg"
-      %>
-      <%= link_to I18n.t('cart.order.cancel'),
-                  cancel_orders_path,
-                  data: { "turbo-method": :post },
-                  class: "btn btn-outline-danger btn-lg"
-      %>
-    </div>
+    <% end %>
   </div>
 
-<% end %>
+  <div class="d-grid d-sm-flex gap-2 justify-content-sm-end my-3">
+    <%= turbo_stream_from dom_id(current_order, :total) %>
+    <div id="<%= dom_id(current_order, :total) %>">
+      <%= render 'orders/total', order_total: current_order.total_price %>
+    </div>
+
+    <%= link_to I18n.t('cart.order.complete'),
+                edit_order_path(current_order, locale: I18n.locale),
+                class: "btn btn-success btn-lg"
+    %>
+    <%= link_to I18n.t('cart.order.cancel'),
+                cancel_orders_path(locale: I18n.locale),
+                data: { "turbo-method": :post },
+                class: "btn btn-outline-danger btn-lg"
+    %>
+  </div>
+</div>

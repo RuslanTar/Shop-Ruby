@@ -1,6 +1,7 @@
-<li class="nav-item language-select">
+<li class="nav-item language-select d-flex align-items-center">
   <ul class="d-flex">
-    <%= link_to 'UA', url_for(locale: :uk), class: 'link-secondary text-decoration-none px-2' %>
-    <%= link_to 'EN', url_for(locale: :en), class: 'link-secondary text-decoration-none px-2' %>
+    <% LOCALES.each_pair do |name, sym| %>
+      <%= link_to name.to_s.upcase, url_for(locale: sym), class: 'link-secondary text-decoration-none px-2' %>
+    <% end %>
   </ul>
 </li>

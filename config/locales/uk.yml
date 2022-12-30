@@ -1,4 +1,9 @@
 uk:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        unit: "₴"
   navbar:
     home: "Дім"
     cart: "Кошик"
@@ -6,7 +11,7 @@ uk:
     menu: "Меню подано"
   cart:
     name: "Кошик"
-    empty_cart: "Кошик пустий"
+    empty_cart: "Пусто"
     order:
       complete: 'Підтвердити замовлення'
       cancel: 'Відмінити'

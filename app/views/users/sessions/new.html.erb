@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center flex-column auth-block">
     <h2 class="text-center"><%= I18n.t('devise.links.login') %></h2>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name, locale: I18n.locale)) do |f| %>
       <div class="form-group">
         <%= f.label :email, I18n.t('devise.links.email') %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
