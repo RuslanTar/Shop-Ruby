@@ -1,0 +1,25 @@
+<div class="card overflow-scroll" id="<%= dom_id(product) %>">
+  <%= link_to product, data: { turbo_frame: 'modal' }, class: 'text-decoration-none text-reset flex-grow-0' do %>
+    <%= image_tag url_for(product.images.first&.variant(:small) || "everlabs_logo.jpeg"), style: "cursor: pointer" %>
+  <% end %>
+  <div class="admin-table-texts flex-grow-1">
+      <%#= tag.p product.name&.truncate(60), class: 'text-truncate m-0 fs-5 flex-grow-1' %>
+    <%= form_for product, method: :put do |f| %>
+      <%= f.text_area :name, value: product.name, class: 'autosize', onchange: "this.form.requestSubmit()" %>
+    <% end %>
+    <%= form_for product, method: :put do |f| %>
+      <%= f.text_area :description, value: product.description, class: 'autosize', onchange: "this.form.requestSubmit()" %>
+    <% end %>
+  </div>
+  <%= tag.div class: "text-truncate admin-table-price fs-6 flex-grow-0 flex-shrink-0 #{'disabled' unless product.price&.positive?}" do %>
+    <%= icon("fa-solid","money-bill", class: "fa-lg") %>
+    <%= form_for product, method: :put do |f| %>
+      <%= f.number_field :price, value: product.price, onchange: "this.form.requestSubmit()", min: '0', max: '2147483647' %>
+    <% end %>
+    <%= tag.p "USD", class: "m-0 ps-2" %>
+  <% end %>
+  <div class="admin-actions flex-grow-0">
+    <%#= link_to icon("fa-solid","pencil", class: "fa-lg"), root_path, class: "btn admin-action" %>
+    <%= link_to icon("fa-solid","trash-can", class: "fa-lg"), product_path(id: product.id), data: { "turbo-method": :delete }, class: "btn admin-action delete-action" %>
+  </div>
+</div>

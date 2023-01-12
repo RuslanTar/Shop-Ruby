@@ -25,11 +25,11 @@
             <ul class="navbar-nav justify-content-between flex-grow-1">
               <div class="d-lg-flex">
                 <li class="nav-item">
-                  <%= link_to icon("fa-solid", "house", I18n.t('navbar.home'), class: "fa-md text-center", style: "width: 20px"), root_path(locale: I18n.locale), class: "nav-link active", "aria-current": "page" %>
+                  <%= link_to icon("fa-solid", "house", I18n.t('navbar.home'), class: "fa-md text-center", style: "width: 20px"), root_path(locale: I18n.locale), class: "nav-link #{active_url?(root_path)}", "aria-current": "page" %>
                 </li>
 
                 <li class="nav-item">
-                  <%= link_to orders_path(locale: I18n.locale), class: "nav-item nav-link" do %>
+                  <%= link_to orders_path(locale: I18n.locale), class: "nav-item nav-link #{active_url?(orders_path)}" do %>
                     <%= icon('fa-solid', 'cart-shopping', I18n.t('navbar.cart'), class: "fa-md text-center", style: "width: 20px") %>
                     <%= turbo_stream_from dom_id(current_order, :size) %>
                     <span class="badge text-bg-secondary" id="<%= dom_id(current_order, :size) %>">
@@ -40,6 +40,12 @@
               </div>
 
               <div class="d-lg-flex" id="nav-right">
+                <% if current_user.admin? %>
+                  <li class="nav-item">
+                    <%= link_to icon("fa-solid", "bars-progress", I18n.t('navbar.admin_panel'), class: "fa-md text-center", style: "width: 20px"), admin_dashboard_path(locale: I18n.locale), class: "nav-link", "aria-current": "page" %>
+                  </li>
+                <% end %>
+
                 <%= render 'layouts/language_selector' %>
                 <%= render 'layouts/darkmode_switch' %>
                 <li class="nav-item navbar-text text-truncate">

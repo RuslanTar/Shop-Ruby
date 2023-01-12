@@ -1,0 +1,21 @@
+<div class="container-xxl">
+  <%= render 'admin/top_section', type: 'product' %>
+  <div class="admin-table">
+    <div class="admin-table-header">
+      <div class="d-flex flex-grow-1" style="padding-left: calc(2rem + 50px + 1px)">
+        <%= tag.p 'Name', class: "w-50 ps-3" %>
+        <%= tag.p 'Description', class: "w-50 ps-3" %>
+      </div>
+      <%= tag.p 'Price', style: "flex-grow: 0; width: calc(14rem + 2px);" %>
+      <%= tag.p 'Actions', style: "flex-grow: 0; width: calc(3rem + 18 px)" %>
+    </div>
+
+    <div class="admin-table-body overflow-auto">
+      <% if @all_products.blank? %>
+        <%#= render 'orders/empty_cart' %>
+      <% else %>
+        <%= render @all_products %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,12 @@
   </head>
 
   <body>
+  <% if params[:controller].match?(/(?=admin\/).+/) %>
+    <%= render 'admin/navbar' %>
+    <div class="background-image"></div>
+  <% else %>
     <%= render 'layouts/navbar'%>
+  <% end %>
 
     <% if notice %>
     <p class="alert alert-success m-0"><%= notice %></p>

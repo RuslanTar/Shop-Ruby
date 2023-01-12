@@ -35,11 +35,17 @@ en:
       format:
         format: "%u%n"
         unit: "$"
+        code: "USD"
   navbar:
     home: "Home"
     cart: "Cart"
     logout: "Log Out"
     menu: "Menu"
+    dashboard: "Dashboard"
+    users: "Users"
+    products: "Products"
+    back_to_shop: "Back to Shop"
+    admin_panel: 'Admin panel'
   cart:
     name: "Cart"
     empty_cart: "Empty"
@@ -51,5 +57,18 @@ en:
   product:
     add_to_cart: 'Add to Cart'
   modal:
+    confirm: 'Confirm'
     close: 'Close'
+  admin:
+    search:
+      product: "Search products"
+      user: "Search users"
+    new:
+      product: "New product"
+      user: "New user"
+    add:
+      product: "Add new product"
+      user: "Add new user"
+    filters:
+      button: "Filters"
 

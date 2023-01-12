@@ -3,11 +3,18 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  ActiveAdmin.routes(self)
+  # ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   #
   # Defines the root path route ("/")
   root 'products#index'
+
+  namespace :admin do
+    get '/', to: 'home#index'
+    get 'dashboard', to: 'home#dashboard', as: :dashboard
+    resources :products
+    resources :users
+  end
 
   if Rails.env.development?
     mount Sidekiq::Web => '/sidekiq'

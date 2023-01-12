@@ -32,7 +32,7 @@
 
 <!--  Info-->
 <div class="ps-3" id="modal-info">
-  <p class="fw-bold m-0 pt-2"><%= product.name %></p>
+  <p class="fw-bold fs-5 m-0 pt-2"><%= product.name %></p>
   <div class="d-flex align-items-center" id="price-and-button">
     <h3 class="d-inline-block text-danger pe-3 py-2 m-0"><%= number_to_currency(product.price, precision: 0) %></h3>
     <%= link_to I18n.t('product.add_to_cart'), product_order_items_path(product, locale: I18n.locale), data: { "turbo-method": :post }, class: "btn btn-outline-success" %>

@@ -68,7 +68,12 @@
   body {
     color: var(--bs-white);
     --bs-border-color: var(--bs-gray-800);
-    background-color: var(--bs-dark) !important;
+    background-color: var(--bs-black) !important;
+  }
+
+  .background-image:before {
+    background: url("background_dark.jpg");
+    background-size: cover;
   }
 
   .navbar, .offcanvas {

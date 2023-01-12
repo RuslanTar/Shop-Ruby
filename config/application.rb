@@ -30,6 +30,7 @@ module Shop
     config.i18n.default_locale = :uk
 
     config.after_initialize do
+      ElasticsearchCreateIndexesJob.perform_async
       UpdateCurrenciesJob.perform_async
     end
   end

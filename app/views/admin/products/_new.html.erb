@@ -1,0 +1,44 @@
+<%#= form_with model: Product, scope: :product, class: "new-form", id: "new-form", url: products_path, method: :post do |f| %>
+  <%# invalid_price = @product.errors.include?(:price) %>
+  <%#= f.label :images, "Images" %>
+  <%#= f.file_field :images, multiple: true, class: "form-control" %>
+  <%#= f.label :name, "Name" %>
+<!--  , required: true-->
+  <%#= f.text_field :name, autofocus: true %>
+  <%#= f.label :description, "Description" %>
+  <%#= f.text_area :description %>
+  <%#= f.label :price, "Price" %>
+  <%#= f.number_field :price %>
+  <%#= f.number_field :price, format: { with: /\A\d+\z/, message: "only allows numbers" } %>
+  <%#= f.submit t('modal.confirm'), disable_with: 'Creating' %>
+<%# end %>
+
+<div class="modal fade admin-modal" id="new_product_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-fullscreen-md-down modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= I18n.t('admin.add.product') %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: Product, scope: :product, class: "new-form", id: "new-product", url: products_path, method: :post do |f| %>
+          <%= f.label :images, "Images" %>
+          <%= f.file_field :images, multiple: true, class: "form-control" %>
+          <%= f.label :name, "Name" %>
+<!--            , required: true-->
+          <%= f.text_field :name, autofocus: true %>
+          <%= f.label :description, "Description" %>
+          <%= f.text_area :description %>
+          <%= f.label :price, "Price" %>
+          <%= f.number_field :price %>
+          <%#= f.number_field :price, format: { with: /\A\d+\z/, message: "only allows numbers" } %>
+          <%= f.submit t('modal.confirm'), disable_with: 'Creating' %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" form="new-form"><%= I18n.t('modal.confirm') %></button>
+      </div>
+    </div>
+  </div>
+</div>

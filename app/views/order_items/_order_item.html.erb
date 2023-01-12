@@ -20,7 +20,7 @@
         <li>
           <%= link_to icon("fa-regular", "trash-can", I18n.t('cart.order.order_item.remove', locale: order_item.product.translation.locale), class: "fa-lg me-2 py-3"),
                       product_order_item_path(product_id: order_item.product.id, id: order_item.id, locale: I18n.locale),
-                      data: { "turbo-method": :delete},
+                      data: { "turbo-method": :delete },
                       class: "order-item-button dropdown-item btn btn-outline-danger"
           %>
         </li>

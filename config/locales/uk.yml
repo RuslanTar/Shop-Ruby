@@ -4,11 +4,17 @@ uk:
       format:
         format: "%u%n"
         unit: "₴"
+        code: "UAH"
   navbar:
     home: "Дім"
     cart: "Кошик"
     logout: "Вийди звідси"
     menu: "Меню подано"
+    dashboard: "Головна"
+    users: "Користувачі"
+    products: "Товари"
+    back_to_shop: "Назад до магазину"
+    admin_panel: 'Адмін панель'
   cart:
     name: "Кошик"
     empty_cart: "Пусто"
@@ -20,5 +26,17 @@ uk:
   product:
     add_to_cart: 'Додати у кошик'
   modal:
+    confirm: 'Підтвердити'
     close: 'Закрити'
-
+  admin:
+    search:
+      product: "Шукати товари"
+      user: "Шукати користувачів"
+    new:
+      product: "Новий товар"
+      user: "Новий користувач"
+    add:
+      product: "Створити новий товар"
+      user: "Створити нового користувача"
+    filters:
+      button: "Фільтри"

@@ -12,8 +12,11 @@
  *
  *= require_tree .
  *= require_self
- *= stub 'active_admin'
+ //*= stub 'active_admin'
  *= require 'darkmode'
+ *= require 'admin_panel'
+ *= require 'modal'
+ *= require dropzone/dropzone
  */
 
 /*Custom bootstrap variables must be set or imported *before* bootstrap.*/
@@ -22,6 +25,29 @@
 
 body, .navbar, .offcanvas, .card, .modal-content, .order > .card, .order-item-input, #order_items > div, .dropdown-menu, .dropdown-item {
   transition: 0.3s ease-in-out;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.background-image:before {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: url("background_light.jpg") fixed;
+  background-size: cover;
+  height: 100vh;
+  z-index: -1;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
 }
 
 .offcanvas {
@@ -154,7 +180,7 @@ body .fade {
 .card-img-top img {
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: fill;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -259,8 +285,13 @@ body .fade {
     display: flex !important;
   }
 
-  .modal-body {
-    flex-direction: column;
+  .nav-link {
+    --bs-nav-link-color: var(--bs-navbar-color);
+    --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
+  }
+
+  .container-fluid .show > .nav-link, .container-fluid .nav-link.active {
+    color: var(--bs-navbar-active-color);
   }
 
   #price-and-button {

@@ -1,0 +1,13 @@
+<div class="admin-container">
+  <%= render 'admin/top_section', type: 'user' %>
+  <div class="admin-table">
+    <div class="products-table-header">
+    </div>
+
+    <% if @users.blank? %>
+      <%#= render 'orders/empty_cart' %>
+    <% else %>
+      <%= render @users %>
+    <% end %>
+  </div>
+</div>

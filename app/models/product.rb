@@ -7,8 +7,6 @@
 #  id          :bigint           not null, primary key
 #  comments    :string
 #  description :text
-#  description :text
-#  name        :string
 #  name        :string
 #  price       :integer
 #  created_at  :datetime         not null
@@ -19,8 +17,14 @@
 #
 #  index_products_on_user_id  (user_id)
 #
+
+require 'elasticsearch/model'
+
 class Product < ApplicationRecord
-  belongs_to :user
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  # belongs_to :user
 
   translates :name, :description, fallbacks_for_empty_translations: true
 
@@ -30,6 +34,7 @@ class Product < ApplicationRecord
   validates :images, file_size: { less_than_or_equal_to: 10.megabytes, message: 'Please Check File Size' },
                      file_content_type: { allow: %w[image/jpeg image/jpg image/png image/gif],
                                           message: 'Please Check File Format' }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
 
   has_many_attached :images do |attachable|
     attachable.variant :small, resize_to_limit: [100, 100]

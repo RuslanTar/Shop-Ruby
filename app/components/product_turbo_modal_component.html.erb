@@ -6,10 +6,10 @@
     <div class="modal-dialog modal-xl modal-fullscreen-lg-down modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 text-truncate" id="ModalLabel"><%= @product_name %></h1>
+          <h1 class="modal-title fs-5 text-truncate" id="ModalLabel"><%= @header %></h1>
           <%= button_tag '', data: { action: "turbo-modal#hideModal" }, class: "btn-close", type: 'button', 'aria-label': "Close" %>
         </div>
-        <div class="modal-body d-flex">
+        <div class="modal-body d-flex flex-column flex-lg-row ">
           <%= content %>
         </div>
         <div class="modal-footer">

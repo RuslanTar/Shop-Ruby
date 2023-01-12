@@ -7,4 +7,13 @@ module ApplicationHelper
     number = usd_to_uah(number) if options[:locale] == :uk
     super(number, options)
   end
+
+  def active_url?(link)
+    if request.path == '/'
+      return unless link.start_with?("#{request.path}?") || link == request.path
+
+      'active'
+    end
+    'active' if request.path.in?(link)
+  end
 end
