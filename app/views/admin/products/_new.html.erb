@@ -24,7 +24,7 @@
         <%= form_with model: Product, scope: :product, class: "new-form", id: "new-product", url: products_path, method: :post do |f| %>
           <%= f.label :images, "Images" %>
           <%= f.file_field :images, multiple: true, class: "form-control" %>
-          <%= f.label :name, "Name" %>
+          <%= f.label :name, "Name", required: true, class: 'required' %>
 <!--            , required: true-->
           <%= f.text_field :name, autofocus: true %>
           <%= f.label :description, "Description" %>

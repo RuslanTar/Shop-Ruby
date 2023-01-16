@@ -1,8 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 //= require dropzone
-// // = require jquery.validate
-// // = require jquery.validate.additional-methods
-// // = require jquery.validate.localization/messages_uk
+// require jquery.validate
+// require jquery.validate.additional-methods
+// require jquery.validate.localization/messages_uk
 
 import "@hotwired/turbo-rails"
 import "controllers"
@@ -125,15 +125,14 @@ function autosize(){
         elems.css('height', '50px');
     });
 
-    text.on('keyup', function(e){
+    text.on('keyup', function(){
         resize($(this));
     });
 
-    function resize ($text, focus = false) {
+    function resize ($text) {
         // $text.css('height', Math.max(...Object.values($text).map(el => el.scrollHeight).slice(0, $text.length)) + 'px');
         const elems = elements_to_resize($text);
         // elems.css('height', '0');
-        console.log($text[0].scrollHeight);
         elems.css('height', `${$text[0].scrollHeight}px`);
     }
 

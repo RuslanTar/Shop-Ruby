@@ -20,6 +20,6 @@
   <% end %>
   <div class="admin-actions flex-grow-0">
     <%#= link_to icon("fa-solid","pencil", class: "fa-lg"), root_path, class: "btn admin-action" %>
-    <%= link_to icon("fa-solid","trash-can", class: "fa-lg"), product_path(id: product.id), data: { "turbo-method": :delete }, class: "btn admin-action delete-action" %>
+    <%= link_to icon("fa-solid","trash-can", class: "fa-lg"), product_path(id: product.id), data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' }, class: "btn admin-action delete-action" %>
   </div>
 </div>
