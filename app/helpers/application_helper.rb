@@ -14,6 +14,6 @@ module ApplicationHelper
 
       'active'
     end
-    'active' if request.path.in?(link)
+    'active' if link.partition('?')[0].in?(request.path)
   end
 end

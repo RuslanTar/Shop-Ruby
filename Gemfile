@@ -69,6 +69,7 @@ gem 'bootsnap', require: false
 
 gem 'figaro'
 
+# The pagination gems must be added before the Elasticsearch gems in your Gemfile, or loaded first in your application
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 

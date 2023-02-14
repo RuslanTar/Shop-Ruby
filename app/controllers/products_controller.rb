@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit update destroy]
+  # include ActiveModel::Model
+  # include ProductSearchable
+
+  before_action :set_product, only: %i[show update destroy]
 
   def index
     @all_products = Product.all.order(:id)
@@ -28,16 +31,19 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
-      # redirect_to product_path(@product)
-      head :ok
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @product.update(product_params)
   end
 
   def destroy
     flash[:error] = @product.errors.full_messages unless @product.destroy
+  end
+
+  def search
+    @products = Product.search(params[:query]) if params[:query].present?
+  end
+
+  def filter
+    @results = Product.filter(params[:price_min], params[:price_max], params[:sort_by])
   end
 
   private

@@ -1,5 +1,5 @@
-<li class="nav-item language-select d-flex align-items-center">
-  <ul class="d-flex">
+<li class="nav-item language-select d-flex px-0 px-lg-2ww align-items-center">
+  <ul class="d-flex navbar-text">
     <% LOCALES.each_pair do |name, sym| %>
       <%= link_to name.to_s.upcase, url_for(locale: sym), class: "px-2 py-0 nav-link #{'active' if I18n.locale == sym}" %>
     <% end %>

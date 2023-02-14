@@ -6,23 +6,19 @@
     <% end %>
 
     <div class="d-flex" id="nav-main">
-      <%= render 'layouts/language_selector' %>
-
       <input type="checkbox" class="color_mode_button" id="darkmode-toggle"/>
-      <%= render 'layouts/darkmode_switch' %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <% if user_signed_in? %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%= I18n.t('navbar.menu') %></h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-between flex-grow-1">
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%= I18n.t('navbar.menu') %></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-between flex-grow-1">
+            <% if user_signed_in? %>
               <div class="d-lg-flex">
                 <li class="nav-item">
                   <%= link_to icon("fa-solid", "house", I18n.t('navbar.home'), class: "fa-md text-center", style: "width: 20px"), root_path(locale: I18n.locale), class: "nav-link #{active_url?(root_path)}", "aria-current": "page" %>
@@ -38,28 +34,40 @@
                   <% end %>
                 </li>
               </div>
+            <%end %>
 
-              <div class="d-lg-flex" id="nav-right">
-                <% if current_user.admin? %>
-                  <li class="nav-item">
-                    <%= link_to icon("fa-solid", "bars-progress", I18n.t('navbar.admin_panel'), class: "fa-md text-center", style: "width: 20px"), admin_dashboard_path(locale: I18n.locale), class: "nav-link", "aria-current": "page" %>
-                  </li>
-                <% end %>
-
-                <%= render 'layouts/language_selector' %>
-                <%= render 'layouts/darkmode_switch' %>
-                <li class="nav-item navbar-text text-truncate">
-                  <span><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md text-center", style: "width: 20px") %></span>
-                </li>
-
+            <div class="d-lg-flex" id="nav-right">
+              <% if user_signed_in? && current_user.admin? %>
                 <li class="nav-item">
-                  <%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path(locale: I18n.locale), data: { "turbo-method": :delete }, class: "nav-link text-danger" %>
+                  <%= link_to icon("fa-solid", "bars-progress", I18n.t('navbar.admin_panel'), class: "fa-md text-center", style: "width: 20px"), admin_dashboard_path(locale: I18n.locale), class: "nav-link", "aria-current": "page" %>
                 </li>
-              </div>
-            </ul>
-          </div>
+              <% end %>
+
+              <%= render 'layouts/language_selector' %>
+              <%= render 'layouts/darkmode_switch' %>
+
+              <% if user_signed_in? %>
+                <div class="d-lg-none">
+                  <li class="nav-item py-2"><span class="dropdown-item user-select-none"><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md", style: "width: 20px") %></span></li>
+                  <li class="nav-item py-2"><%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path(locale: I18n.locale), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %></li>
+                </div>
+
+                <li class="nav-item dropdown d-none d-lg-flex align-items-center">
+                  <button class="btn btn-dark dropdown-toggle user-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= icon('fa-solid', 'user', class: "fa-md text-center") %>
+                  </button>
+
+                  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                    <li><span class="dropdown-item user-select-none"><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md", style: "width: 20px") %></span></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path(locale: I18n.locale), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %></li>
+                  </ul>
+                </li>
+              <% end %>
+            </div>
+          </ul>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </nav>

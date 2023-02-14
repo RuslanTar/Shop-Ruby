@@ -1,6 +1,6 @@
 module Admin
   class ProductsController < HomeController
-    include Searchable
+    # include ProductSearchable
 
     before_action :set_product, only: %i[show edit create update destroy]
 
@@ -34,13 +34,16 @@ module Admin
     #
     # def destroy; end
 
-    private
-
     def search
-      unless params[:query].blank?
-        @results = Product.search(params[:query])
-      end
+      @products = Product.search(params[:query]) if params[:query].present?
     end
+
+    def filter
+      @products = Product.filter(params[:price_min], params[:price_max], params[:sort_by])
+      render 'admin/products/search'
+    end
+
+    private
 
     def product_params
       params.require(:product).permit(:title, :description, images: [])

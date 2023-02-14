@@ -1,5 +1,37 @@
-<%= user.id %>
-<%= user.name %>
-<%= user.email %>
-<%= user.role %>
-<br>
+<div class="card overflow-scroll<%= ' current-user' if user == current_user %>" id="<%= dom_id(user) %>">
+  <div class="d-flex gap-2 flex-grow-1">
+    <div class="admin-table-texts flex-grow-1">
+      <%= form_with model: user, method: :put, class: 'user-form' do |f| %>
+        <div class="admin-form">
+          <%= f.text_field :name, value: user.name, onchange: "this.form.requestSubmit()" %>
+        </div>
+      <% end %>
+      <%= form_with model: user, method: :put, class: 'user-form' do |f| %>
+        <div class="admin-form">
+          <%= f.text_field :email, value: user.email, onchange: "this.form.requestSubmit()" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex-grow-0 d-flex align-items-center">
+      <%= form_with model: user, method: :put, class: 'user-form' do |f| %>
+        <div class="px-2 d-flex user-role">
+          <% if user == current_user %>
+            <%= f.label '#', "User", class: 'btn btn-outline-primary disabled' %>
+          <% else %>
+            <%= f.radio_button :role, 'user', id: "user_role_#{user.id}", checked: user.role == 'user', class: 'btn-check', onchange: "this.form.requestSubmit()" %>
+            <%= f.label "role_#{user.id}".to_sym, "User", class: 'btn btn-outline-primary' %>
+          <% end %>
+
+          <%= f.radio_button :role, 'admin', id: "user_role_admin_#{user.id}", checked: user.role == 'admin', class: 'btn-check', onchange: "this.form.requestSubmit()"  %>
+          <%= f.label "role_admin_#{user.id}".to_sym, "Admin", class: 'btn btn-outline-danger' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="admin-actions flex-grow-0">
+    <%#= link_to icon("fa-solid","pencil", class: "fa-lg"), root_path, class: "btn admin-action" %>
+    <%= link_to icon("fa-solid","trash-can", class: "fa-lg"), user_path(id: user.id), data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' }, class: "btn admin-action delete-action" %>
+  </div>
+</div>

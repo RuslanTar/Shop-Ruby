@@ -1,5 +1,7 @@
 <div class="container-xxl admin-page">
-  <%= render 'admin/top_section', type: 'product', search_value: nil %>
+  <%= render 'admin/top_section', type: 'product',
+             search_value: @products.search.definition[:body][:query][:multi_match].present? ? @products.search.definition[:body][:query][:multi_match][:query] : nil %>
+  <p class="results-found"><%= @products ? @products.records.total : 0 %> results found</p>
 
   <div class="admin-table-header">
     <div class="d-flex flex-grow-1" style="padding-left: calc(2rem + 50px + 1px)">
@@ -10,11 +12,12 @@
     <%= tag.p 'Actions', style: "flex-grow: 0; width: calc(3rem + 18px)" %>
   </div>
 
-  <div class="admin-table-body overflow-scroll pb-3">
-    <% if @all_products.blank? %>
+  <div class="admin-table-body overflow-auto">
+    <% if @products.blank? %>
       <%#= render 'orders/empty_cart' %>
     <% else %>
-      <%= render @all_products %>
+      <%# debugger %>
+      <%= render @products.records %>
     <% end %>
   </div>
 </div>

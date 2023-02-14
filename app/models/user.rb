@@ -25,8 +25,9 @@ require 'elasticsearch/model'
 
 class User < ApplicationRecord
   extend Enumerize
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include UserSearchable
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -36,5 +37,6 @@ class User < ApplicationRecord
 
   enumerize :role, in: { user: 0, admin: 1 }, default: 0, predicates: true
 
-  validates :name, presence: true
+  validates_presence_of :name
+  validates_uniqueness_of :email
 end

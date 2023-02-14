@@ -6,11 +6,7 @@
     <% end %>
 
     <div class="d-flex" id="nav-main">
-      <%= render 'layouts/language_selector' %>
-
       <input type="checkbox" class="color_mode_button" id="darkmode-toggle"/>
-      <%= render 'layouts/darkmode_switch' %>
-
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -28,28 +24,39 @@
               </li>
 
               <li class="nav-item">
-                <%= link_to icon('fa-solid', 'users', I18n.t('navbar.users'), class: "fa-md text-center", style: "width: 20px"), admin_users_path(locale: I18n.locale), class: "nav-item nav-link #{active_url?(admin_users_path)}}"%>
+                <%= link_to icon('fa-solid', 'users', I18n.t('navbar.users'), class: "fa-md text-center", style: "width: 20px"), admin_users_path(locale: I18n.locale), class: "nav-item nav-link #{active_url?(admin_users_path)}"%>
               </li>
 
               <li class="nav-item">
                 <%= link_to icon('fa-solid', 'box-open', I18n.t('navbar.products'), class: "fa-md text-center", style: "width: 20px"), admin_products_path(locale: I18n.locale), class: "nav-item nav-link #{active_url?(admin_products_path)}"%>
               </li>
-
-              <li class="nav-item">
-                <%= link_to icon('fa-solid', 'arrow-left', I18n.t('navbar.back_to_shop'), class: "fa-md text-center", style: "width: 20px"), root_path(locale: I18n.locale), class: "nav-item nav-link"%>
-              </li>
             </div>
 
             <div class="d-lg-flex" id="nav-right">
-              <%= render 'layouts/language_selector' %>
-              <%= render 'layouts/darkmode_switch' %>
-              <li class="nav-item navbar-text text-truncate">
-                <span><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md text-center", style: "width: 20px") %></span>
+              <li class="nav-item">
+                <%= link_to icon('fa-solid', 'arrow-left', I18n.t('navbar.back_to_shop'), class: "fa-md text-center", style: "width: 20px"), root_path(locale: I18n.locale), class: "nav-item nav-link"%>
               </li>
 
-              <li class="nav-item">
-                <%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path(locale: I18n.locale), data: { "turbo-method": :delete }, class: "nav-link text-danger" %>
+              <%= render 'layouts/language_selector' %>
+              <%= render 'layouts/darkmode_switch' %>
+
+              <div class="d-lg-none">
+                <li class="nav-item py-2"><span class="dropdown-item user-select-none"><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md", style: "width: 20px") %></span></li>
+                <li class="nav-item py-2"><%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path(locale: I18n.locale), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %></li>
+              </div>
+
+              <li class="nav-item dropdown d-none d-lg-flex align-items-center">
+                <button class="btn btn-dark dropdown-toggle user-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= icon('fa-solid', 'user', class: "fa-md text-center") %>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                  <li><span class="dropdown-item user-select-none"><%= icon('fa-solid', 'user', truncate(current_user.name, length: 50), class: "fa-md", style: "width: 20px") %></span></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><%= link_to icon('fa-solid', 'right-from-bracket', I18n.t('navbar.logout'), class: "fa-md text-center", style: "width: 20px"), destroy_user_session_path(locale: I18n.locale), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %></li>
+                </ul>
               </li>
+
             </div>
           </ul>
         </div>

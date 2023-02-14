@@ -3,20 +3,28 @@
     <%= image_tag url_for(product.images.first&.variant(:small) || "everlabs_logo.jpeg"), style: "cursor: pointer" %>
   <% end %>
   <div class="admin-table-texts flex-grow-1">
-      <%#= tag.p product.name&.truncate(60), class: 'text-truncate m-0 fs-5 flex-grow-1' %>
-    <%= form_for product, method: :put do |f| %>
-      <%= f.text_area :name, value: product.name, class: 'autosize', onchange: "this.form.requestSubmit()" %>
+    <%= form_with model: product, method: :put, class: 'product-form' do |f| %>
+      <div class="admin-form">
+        <%= f.text_area :name, value: product.name, class: 'autosize', onchange: "this.form.requestSubmit()" %>
+      </div>
     <% end %>
-    <%= form_for product, method: :put do |f| %>
-      <%= f.text_area :description, value: product.description, class: 'autosize', onchange: "this.form.requestSubmit()" %>
+    <%= form_with model: product, method: :put, class: 'product-form' do |f| %>
+      <div class="admin-form">
+        <%= f.text_area :description, value: product.description, class: 'autosize', onchange: "this.form.requestSubmit()" %>
+      </div>
     <% end %>
   </div>
   <%= tag.div class: "text-truncate admin-table-price fs-6 flex-grow-0 flex-shrink-0 #{'disabled' unless product.price&.positive?}" do %>
     <%= icon("fa-solid","money-bill", class: "fa-lg") %>
-    <%= form_for product, method: :put do |f| %>
-      <%= f.number_field :price, value: product.price, onchange: "this.form.requestSubmit()", min: '0', max: '2147483647' %>
+    <%= form_with model: product, method: :put, class: 'product-form align-items-center' do |f| %>
+      <div class="admin-form">
+        <%= f.number_field :price, value: product.price, onchange: "this.form.requestSubmit()", min: '-10', max: '2147483647' %>
+      </div>
+        <%= tag.p "USD", class: "m-0 ps-2" %>
+
+
     <% end %>
-    <%= tag.p "USD", class: "m-0 ps-2" %>
+
   <% end %>
   <div class="admin-actions flex-grow-0">
     <%#= link_to icon("fa-solid","pencil", class: "fa-lg"), root_path, class: "btn admin-action" %>

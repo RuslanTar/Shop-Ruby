@@ -7,6 +7,13 @@
   --switcher-gradient: linear-gradient(180deg,#ffcc89,#d8860b);
 }
 
+#darkmode-toggle {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  display: none;
+}
+
 .darkmode-toggle-label {
   width: 60px;
   height: 28px;
@@ -17,50 +24,43 @@
   cursor: pointer;
   transition: 0.3s;
   background: var(--switcher-background);
-}
 
-.darkmode-toggle-label:after {
-  content: "";
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 2px;
-  left: var(--switcher-left);
-  background: var(--switcher-gradient);
-  border-radius: 180px;
-  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
-  transform: var(--switcher-transform);
-  transition: 0.3s;
-}
+  &:after {
+    content: "";
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 2px;
+    left: var(--switcher-left);
+    background: var(--switcher-gradient);
+    border-radius: 180px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+    transform: var(--switcher-transform);
+    transition: 0.3s;
+  }
 
-#darkmode-toggle {
-  width: 0;
-  height: 0;
-  visibility: hidden;
-  display: none;
-}
+  &:active:after {
+    width: 31px;
+  }
 
-.darkmode-toggle-label:active:after{
-  width: 31px;
-}
+  & svg {
+    position: absolute;
+    width: 15px;
+    top: 6.5px;
+    z-index: 100;
 
-.darkmode-toggle-label svg {
-  position: absolute;
-  width: 15px;
-  top: 6.5px;
-  z-index: 100;
-}
+    &.sun {
+      left: 6.5px;
+      fill: var(--switcher-sun);
+      transition: 0.3s;
+    }
 
-.darkmode-toggle-label svg.sun {
-  left: 6.5px;
-  fill: var(--switcher-sun);
-  transition: 0.3s;
-}
-
-.darkmode-toggle-label svg.moon {
-  left: 38.5px;
-  fill: var(--switcher-moon);
-  transition: 0.3s;
+    &.moon {
+      left: 38.5px;
+      fill: var(--switcher-moon);
+      transition: 0.3s;
+    }
+  }
 }
 
 /* change background color if the OS is on Dark Mode */
@@ -68,7 +68,7 @@
   body {
     color: var(--bs-white);
     --bs-border-color: var(--bs-gray-800);
-    background-color: var(--bs-black) !important;
+    background-color: var(--bs-gray-900) !important;
   }
 
   .background-image:before {
@@ -114,7 +114,7 @@
   }
 
   .dropdown-item {
-    color: var(--bs-white) !important;
+    //color: var(--bs-white) !important;
   }
 
   .btn-close {

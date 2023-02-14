@@ -1,0 +1,24 @@
+<div class="container-xxl admin-page">
+  <%= render 'admin/top_section', type: 'user', search_value: request.params['query'] %>
+  <p class="results-found"><%= @users&.records.present? ? @users.records.total : 0 %> results found</p>
+
+  <div class="admin-table-header">
+    <div class="d-flex gap-2 flex-grow-1">
+      <div class="d-flex flex-grow-1" style="padding-left: 1.5rem">
+        <%= tag.p 'Name', class: "w-50 ps-3" %>
+        <%= tag.p 'Email', class: "w-50 ps-3" %>
+      </div>
+      <%= tag.p 'Role', style: "flex-grow: 0; width: 156px; margin-left: 0.5rem" %>
+    </div>
+    <%= tag.p 'Actions', style: "flex-grow: 0; width: calc(3rem + 18px)" %>
+  </div>
+
+  <div class="admin-table-body overflow-auto">
+    <% if @users.blank? %>
+      <%#= render 'orders/empty_cart' %>
+    <% else %>
+      <%# debugger %>
+      <%= render @users.records %>
+    <% end %>
+  </div>
+</div>

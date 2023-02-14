@@ -12,8 +12,18 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'home#index'
     get 'dashboard', to: 'home#dashboard', as: :dashboard
-    resources :products
-    resources :users
+    resources :products do
+      collection do
+        get 'search'
+        get 'filter'
+      end
+    end
+    resources :users do
+      collection do
+        get 'search'
+        get 'filter'
+      end
+    end
   end
 
   if Rails.env.development?
@@ -26,6 +36,11 @@ Rails.application.routes.draw do
   end
 
   resources :products do
+    collection do
+      get 'search'
+      get 'filter'
+    end
+
     resources :order_items, only: %i[index create update destroy]
   end
 
@@ -40,8 +55,18 @@ Rails.application.routes.draw do
     get 'users', to: 'users/sessions#new'
   end
 
-  get 'locale', to: 'translations#switch_locale', as: :switch_locale
+  # get 'locale', to: 'translations#switch_locale', as: :switch_locale
 
-  devise_for :users, module: 'users'
+  scope :devise do
+    devise_for :users, module: 'users'
+  end
+
+  resources :users do
+    collection do
+      get 'search'
+      get 'filter'
+    end
+  end
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

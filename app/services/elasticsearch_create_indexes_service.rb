@@ -6,7 +6,9 @@ class ElasticsearchCreateIndexesService < ApplicationService
   private
 
   def create_indexes
-    Product.__elasticsearch__.create_index!
     User.__elasticsearch__.create_index!
+    Product.__elasticsearch__.create_index!
+    # User.reindex(import: false)
+    # Product.reindex(import: false)
   end
 end

@@ -18,26 +18,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= I18n.t('admin.add.product') %></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" id="new_product_modal_close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with model: Product, scope: :product, class: "new-form", id: "new-product", url: products_path, method: :post do |f| %>
-          <%= f.label :images, "Images" %>
-          <%= f.file_field :images, multiple: true, class: "form-control" %>
-          <%= f.label :name, "Name", required: true, class: 'required' %>
-<!--            , required: true-->
-          <%= f.text_field :name, autofocus: true %>
-          <%= f.label :description, "Description" %>
-          <%= f.text_area :description %>
-          <%= f.label :price, "Price" %>
-          <%= f.number_field :price %>
-          <%#= f.number_field :price, format: { with: /\A\d+\z/, message: "only allows numbers" } %>
-          <%= f.submit t('modal.confirm'), disable_with: 'Creating' %>
+        <%= form_with model: Product.new, scope: :product, class: "new-form product-form", id: "new-product", url: products_path, method: :post do |f| %>
+          <div class="admin-form">
+            <%= f.label :images, "Images" %>
+            <%= f.file_field :images, multiple: true, class: "form-control" %>
+            <%= f.label :name, "Name" %>
+            <%= f.text_field :name, autofocus: true, required: true, class: 'required' %>
+            <%= f.label :description, "Description" %>
+            <%= f.text_area :description, required: true %>
+            <%= f.label :price, "Price" %>
+            <%= f.number_field :price %>
+          </div>
+          <%#= f.submit t('modal.confirm'), disable_with: 'Creating' %>
         <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" form="new-form"><%= I18n.t('modal.confirm') %></button>
+        <button type="submit" class="btn btn-primary" form="new-product"><%= I18n.t('modal.confirm') %></button>
       </div>
     </div>
   </div>

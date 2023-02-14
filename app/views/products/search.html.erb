@@ -1,5 +1,5 @@
-<div class="container-xxl admin-page">
-  <%= render 'admin/top_section', type: 'user', search_value: nil %>
+<div class="container-xxl">
+  <%= render 'admin/top_section', type: 'product' %>
   <div class="admin-table">
     <div class="admin-table-header">
       <div class="d-flex gap-2 flex-grow-1">
@@ -11,12 +11,13 @@
       </div>
       <%= tag.p 'Actions', style: "flex-grow: 0; width: calc(3rem + 18px)" %>
     </div>
-
+<p>SEARCH RESULTS</p>
     <div class="admin-table-body overflow-auto">
-      <% if @all_users.blank? %>
+      <% if @products.blank? %>
         <%#= render 'orders/empty_cart' %>
       <% else %>
-        <%= render @all_users %>
+        <%# debugger %>
+        <%= render @products.records %>
       <% end %>
     </div>
   </div>
